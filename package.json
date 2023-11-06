@@ -4,7 +4,7 @@
   "private": true,
   "main": "build/electron/main.js",
   "dependencies": {
-    "@phosphor-icons/react": "^2.0.13",
+    "@phosphor-icons/react": "^2.0.14",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
