@@ -1,4 +1,4 @@
-import { ArrowSquareOut, Clock, Dot, File as FileIcon, FileX, GithubLogo, Info, Plus } from "@phosphor-icons/react";
+import { ArrowSquareOut, Clock, Dot, File as FileIcon, FileX, GithubLogo, Info, Plus, TextT } from "@phosphor-icons/react";
 import React, { useContext, useEffect } from "react";
 import { EditorContext } from "../context";
 import { RandomTextBackground } from "../typography/random-text-background";
@@ -147,6 +147,13 @@ export const HomePage: React.FC = () => {
             </div>
         </>
     );
+
+    const logo = (
+        <div className="flex flex-row justify-start items-center gap-2">
+            <TextT className="w-48 h-48" weight="light" />
+            <p className="text-2xl">Placeholder Name</p>
+        </div>
+    )
 
     return (
         <>
