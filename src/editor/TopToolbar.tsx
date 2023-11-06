@@ -34,7 +34,8 @@ export const TopToolbar: React.FC = () => {
 
     let editorTypeIcon = 0;
     if(editorType == "markdown") editorTypeIcon = 1;
-    else if(editorType == "split") editorTypeIcon = 2;
+    else if(editorType == "mixed") editorTypeIcon = 2;
+    else if(editorType == "split") editorTypeIcon = 3;
 
     const saveAndClose = () => {
         updateFileContent(fileContent);
