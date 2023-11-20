@@ -1,5 +1,4 @@
-import { TokensList } from "Tokens";
-import { marked } from "marked";
+import { TokensList, marked } from "marked";
 import TurndownService, { Node } from "turndown";
 
 const headerSizes = ["4xl", "3xl", "2xl", "xl", "lg", "base"]
