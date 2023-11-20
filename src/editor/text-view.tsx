@@ -20,6 +20,20 @@ const slapIdOnTokens = (tokens: Token[]): Token[] => {
     return tokens;
 }
 
+const parseInnerText = (element: HTMLElement): string => {
+    // clone the element
+    const clone = element.cloneNode(true) as HTMLElement;
+    // remove all <aside> elements, along with their children
+    const asides = clone.querySelectorAll('aside');
+    asides.forEach(aside => aside.remove());
+    
+    // add a newline character between each block-level element
+    const blockElements = clone.querySelectorAll('p, div, pre, blockquote');
+    blockElements.forEach(blockElement => blockElement.textContent += '\n');
+
+    return clone.innerText;
+}
+
 export const TextView: React.FC<EditViewProps> = ({ value, includeMd = false, onChange }) => {
     const [lastKeyStroke, setLastKeyStroke] = useState(Date.now() - CONFIG.TYPING_TIMEOUT - 1);
     const [arr, setArr] = useState([] as Token[]);
@@ -72,7 +86,7 @@ export const TextView: React.FC<EditViewProps> = ({ value, includeMd = false, on
                     suppressContentEditableWarning // yup
                     ref={container}
                     onInput={(e) => {
-                        console.log(e.currentTarget.innerText);
+                        console.log(parseInnerText(e.currentTarget));
                         // onChange(includeMd ? e.currentTarget.innerText : unparse(e.currentTarget.innerHTML));
                         setLastKeyStroke(Date.now());
                     }}

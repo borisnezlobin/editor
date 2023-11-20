@@ -6,6 +6,7 @@ import { Separator } from "../utils/separator";
 import "../styles/hover.css"
 import { unparse } from "./md-parse";
 import { headerSizes } from "./EditableMarkdownElement";
+import React from "react";
 
 export const Toolbar: React.FC = () => {
     const { editorType, fileContent, updateFileContent } = useContext(EditorContext);

@@ -127,3 +127,4 @@ dist
 .tern-port
 project_structure.md
 package-lock.json
+pnpm-lock.yaml

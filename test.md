@@ -11,6 +11,7 @@ You can use unordered (bullet) lists...
 *   Spoiled eggs
 *   Answers to the math homework
 *   Star wars movies watch order explanation
+*   Basically at this moment, there is some funny stuff
 
 And numbered lists...
 
@@ -21,7 +22,7 @@ And numbered lists...
 
 # Quotes
 You can insert quotes, so you always know *exactly* who said:
->Nisl suscipit adipiscing. Varius sit amet mattis vulputate enim nulla aliquet portadsfasdtais. Puadfadfasdfrus ut faucibus pulvinar elementum.
+> Nisl suscipit adipiscing. Varius sit amet mattis vulputate enim nulla aliquet portadsfasdtais. Puadfadfasdfrus ut faucibus pulvinar elementum.
 >Inside of a quote, you can also *italicize* and **bold** text -- just as usual.
 
 
