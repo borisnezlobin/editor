@@ -1,7 +1,7 @@
 import { Token } from "marked";
 import { ArrowSquareOut, Check, Copy, PencilLine, X } from "@phosphor-icons/react";
 import { v4 as uuidv4 } from 'uuid';
-import { deEscape } from "./md-parse";
+import { deEscape, mdparse } from "./md-parse";
 import { UnstyledText } from "../typography/UnstyledText";
 import { TextButton } from "../utils/text-button";
 import { Separator } from "../utils/separator";
@@ -40,6 +40,53 @@ export const headerSizes = [
     "text-lg",
     "text-base"
 ]
+
+const blockElements = ["paragraph", "h1", "h2", "h3", "h4", "h5", "h6", "code", "list", "space", "list_item", "blockquote"];
+
+// ho li fuk this is a mess
+// even I no longer have a clue wtf this does
+// it kinda works when I don't think about it too hard so uh
+const prepend = (token: Token, str: string, parent: string) => {
+    if(token.type == "list") console.log(token);
+    const newToken = { ...token };
+    // yeah I cannot be bothered to fix the ts rn and I don't think I ever will be :heart_hands:
+
+    // @ts-ignore
+    if(token.tokens && !token.quoted){
+        for(var i = 0; i < token.tokens.length; i++){
+            // @ts-ignore
+            newToken.tokens[i] = prepend(token.tokens[i], str, i == 0 ? newToken.type : "");
+        }
+        // @ts-ignore
+        // if(blockElements.includes(newToken.tokens[0].type) && newToken.tokens[0].text && !newToken.tokens[0].text.startsWith("> ")){
+        //     newToken.tokens[0].text = str + token.tokens[0].text;
+        // }
+        newToken.quoted = true;
+    }else if(token.type == "list"){
+        // @ts-ignore
+        for(var i = 0; i < token.items.length; i++){
+            // @ts-ignore
+            newToken.items[i] = prepend(token.items[i], str, i == 0 ? newToken.type : "");
+        }
+    }else{
+        if((blockElements.includes(newToken.type) || (newToken.type == "text" && blockElements.includes(parent))) && (
+            (newToken.text && !token.text.startsWith(str)) ||
+            (newToken.raw && !token.raw.startsWith(str))
+        )){
+            if(newToken.tokens) newToken.tokens = [{ raw: str, text: str, type: "text" }, ...newToken.tokens];
+            else{
+                if(newToken.raw) newToken.raw = str + token.raw;
+                if(newToken.text) newToken.text = str + token.text;
+            }
+            // newToken.text = str + token.text;
+            // newToken.raw = str + token.raw;
+        }
+    }
+    // console.log(newToken);
+
+    return newToken;
+}
+
 
 export const EditableMarkdownElement: React.FC<MarkdownElementProps> = ({ element, includeMD = false, updateElement }) => {
     const props = {
@@ -80,8 +127,8 @@ export const EditableMarkdownElement: React.FC<MarkdownElementProps> = ({ elemen
         if(element.text == "") return <></>;
         return (
             <pre aria-details={element.lang} {...props}>
-                ```{element.lang}<br />
-                {deEscape(element.text)}<br />
+                ```{element.lang + "\n"}
+                {deEscape(element.text) + "\n"}
                 ```
             </pre>
         )
@@ -155,17 +202,20 @@ export const EditableMarkdownElement: React.FC<MarkdownElementProps> = ({ elemen
                                         includeMD={includeMD}
                                         updateElement={updateElement}
                                     />
+                                    <span>{"\n"}</span>
                                 </div>
                             )
                         }
                         return (
                             <>
+                                {/* {includeMD ? "> " : ""} */}
                                 <EditableMarkdownElement
                                     key={index}
-                                    element={token}
+                                    element={includeMD ? prepend(token, "> ", "") : token}
                                     includeMD={includeMD}
                                     updateElement={updateElement}
                                 />
+                                <span>{"\n"}</span>
                             </>
                         );
                     })}
@@ -184,7 +234,7 @@ export const EditableMarkdownElement: React.FC<MarkdownElementProps> = ({ elemen
     }
 
     if(element.type === "space"){
-        return <div contentEditable={false} className="h-4" />;
+        return <div contentEditable={false} className="h-4">{element.raw}</div>;
     }
 
     if(element.type == "image"){
@@ -213,6 +263,7 @@ export const EditableMarkdownElement: React.FC<MarkdownElementProps> = ({ elemen
         }
         
         return (
+            <>
             <ul {...props} style={{ listStyleType: includeMD ? "none" : "disc" }}>
                 {element.items?.map((item: ListItem, index: number) => (
                     <li key={index} {...props} >
@@ -228,6 +279,7 @@ export const EditableMarkdownElement: React.FC<MarkdownElementProps> = ({ elemen
                     </li>
                 ))}
             </ul>
+            <br /></>
         );
     }
 
@@ -265,7 +317,7 @@ export const EditableMarkdownElement: React.FC<MarkdownElementProps> = ({ elemen
             <Modal open={linkEditModalOpen} contentEditable={false}>
                 <aside contentEditable={false}>
                     <UnstyledText className="text-xl font-bold mb-4">Edit Link</UnstyledText>
-                    <Separator vertical={true} size="small" />
+                    <Separator vertical={true} size="xlarge" />
                     <div className="h-4" />
                     <input
                         value={linkHref}

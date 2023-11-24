@@ -17,7 +17,7 @@ interface DynamicHeaderProps {
     props: HTMLProps<HTMLHeadingElement>;
 }
 
-export const DynamicHeader: React.FC<DynamicHeaderProps> = ({ props, depth, text, includeMD }) => {
+export const DynamicHeader: React.FC<DynamicHeaderProps> = ({ depth, text, includeMD, props }) => {
     if(depth == 1){
         return (
             <>

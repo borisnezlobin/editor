@@ -2,10 +2,18 @@ import { dialog, ipcMain } from "electron";
 import { readFile, readFileSync, writeFileSync } from "fs";
 import { join } from "path";
 
+const cleanNewlines = (text: string): string => {
+    // github copilot seems to not be shitting me here so it's probably fine
+    return text.replace(/(```[\s\S]*?```)|\n{3,}/g, (match, p1) => {
+        if (p1) return match;
+        return '\n\n';
+    });
+}
+
 function setupIpcController(){
     ipcMain.handle("update-file-content", (event, arg) => {
         try{
-          writeFileSync(arg.file, arg.content);
+          writeFileSync(arg.file, cleanNewlines(arg.content));
         }catch (e){ } // yeah so uh
         // TODO
     });
