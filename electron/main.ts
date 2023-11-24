@@ -1,4 +1,4 @@
-import { app, BrowserWindow, Menu } from 'electron';
+import { app, BrowserWindow, Menu, shell } from 'electron';
 import * as path from 'path';
 import * as isDev from 'electron-is-dev';
 import { mainMenu } from './keyboard-shortcuts';
@@ -31,6 +31,12 @@ function createWindow() {
   
   Menu.setApplicationMenu(mainMenu);
   setupIpcController();
+
+  // trust
+  win.webContents.setWindowOpenHandler((details) => {
+    shell.openExternal(details.url);
+    return { action: "deny" };
+  })
 
   win.webContents.openDevTools();
 }

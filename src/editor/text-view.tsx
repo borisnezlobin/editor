@@ -6,6 +6,10 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import { TypingContext } from "../context";
 import { CONFIG } from "../utils/config";
+import { Muted } from "../typography/muted";
+import { TextTypingEffect } from "../utils/text-typing-effect";
+import placeholderWords from "./empty-editor-phrases.json";
+import { cleanNewlines, parseInnerText } from "../utils/format-utils";
 
 const slapIdOnTokens = (tokens: Token[]): Token[] => {
     for(let i = 0; i < tokens.length; i++) {
@@ -18,20 +22,6 @@ const slapIdOnTokens = (tokens: Token[]): Token[] => {
     }
 
     return tokens;
-}
-
-const parseInnerText = (element: HTMLElement): string => {
-    // clone the element
-    const clone = element.cloneNode(true) as HTMLElement;
-    // remove all <aside> elements, along with their children
-    const asides = clone.querySelectorAll('aside');
-    asides.forEach(aside => aside.remove());
-    
-    // add a newline character between each block-level element
-    const blockElements = clone.querySelectorAll('p, div, pre, blockquote');
-    blockElements.forEach(blockElement => blockElement.textContent += '\n');
-
-    return clone.innerText;
 }
 
 export const TextView: React.FC<EditViewProps> = ({ value, includeMd = false, onChange }) => {
@@ -80,14 +70,14 @@ export const TextView: React.FC<EditViewProps> = ({ value, includeMd = false, on
         <>
             <div className="w-full h-full overflow-scroll pb-36 pt-4">
                 <div
-                    className="bg-transparent text-lg px-4 outline-none max-w-5xl mx-auto pb-16 md-container"
+                    className="bg-transparent text-lg px-4 outline-none max-w-5xl mx-auto pb-16 md-container whitespace-pre-line"
                     contentEditable
                     id="editor"
                     suppressContentEditableWarning // yup
                     ref={container}
                     onInput={(e) => {
                         console.log(parseInnerText(e.currentTarget));
-                        // onChange(includeMd ? e.currentTarget.innerText : unparse(e.currentTarget.innerHTML));
+                        onChange(includeMd ? parseInnerText(e.currentTarget) : cleanNewlines(unparse(e.currentTarget.innerHTML)));
                         setLastKeyStroke(Date.now());
                     }}
                 >
@@ -103,6 +93,13 @@ export const TextView: React.FC<EditViewProps> = ({ value, includeMd = false, on
                     })}
                 </div>
             </div>
+            {arr.length == 0 && (
+                <div className="fixed w-full select-none top-24">
+                    <div className="max-w-5xl mx-auto px-3">
+                        <TextTypingEffect texts={placeholderWords} className="text-gray-400 text-left italic text-lg" />
+                    </div>
+                </div>
+            )}
         </>
     )
 }

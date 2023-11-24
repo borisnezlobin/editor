@@ -76,8 +76,8 @@ body{
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 100;
   transition: all .25s ease;
-  /* left: 50%; */
-  /* transform: translateX(-50%); */
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .focus-dropdown:hover .dropdown-content{
@@ -92,4 +92,28 @@ body{
   margin: 0;
   padding: 0;
   font-family: 'Open Sans', sans-serif;
+}
+
+.form-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -webkit-print-color-adjust: exact;
+  color-adjust: exact;
+  display: inline-block;
+  vertical-align: middle;
+  background-origin: border-box;
+  user-select: none;
+  flex-shrink: 0;
+  height: 1rem;
+  width: 1rem;
+  border: 1px solid #333;
+  border-radius: 0.25rem;
+}
+
+
+.form-checkbox:checked {
+  background-color: #333;
+  border-color: #333;
+  color: white;
 }

@@ -51,7 +51,10 @@ const template: MenuItemConstructorOptions[] = [
             }, {
                 role: 'paste',
                 label: '&Paste'
-            },
+            }, {
+                role: "selectAll",
+                label: "Select &All"
+            }
         ]
     }, {
         label: "Help",

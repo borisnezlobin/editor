@@ -1,8 +1,8 @@
 import { HTMLProps } from "react";
 import ChildrenProps from "../utils/children-props";
 
-export const Muted: React.FC<HTMLProps<HTMLSpanElement> & ChildrenProps> = ({ children, className }) => {
+export const Muted: React.FC<HTMLProps<HTMLSpanElement> & ChildrenProps> = (props) => {
     return (
-        <span className={"text-gray-600 font-normal " + className}>{children}</span>
+        <span {...props} className={"text-gray-600 font-normal " + props.className}>{props.children}</span>
     );
 };

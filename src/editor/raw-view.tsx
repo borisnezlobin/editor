@@ -3,6 +3,7 @@ import { CONFIG } from "../utils/config";
 import { EditViewProps } from "./EditViewProps";
 import { TextArea } from "./TextArea";
 import { TypingContext } from "../context";
+import { cleanNewlines } from "../utils/format-utils";
 
 export const RawView: React.FC<EditViewProps> = ({ value, onChange }) => {
     const [lastKeyStroke, setLastKeyStroke] = useState(Date.now() - CONFIG.TYPING_TIMEOUT - 1);

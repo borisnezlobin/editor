@@ -24,14 +24,16 @@ export const HomePage: React.FC = () => {
 
         // update "recents" localStorage
         const newRecents = [];
-        if(recents[1]) newRecents.push(recents[1]);
-
-        if(recents[0]) newRecents.push(recents[0]);
 
         newRecents.push({
             name: file.name,
             path: (file as any).path
         });
+        
+        if(recents[1]) newRecents.push(recents[1]);
+
+        if(recents[0]) newRecents.push(recents[0]);
+
 
         localStorage.setItem("recents", JSON.stringify(newRecents));
 

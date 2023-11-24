@@ -4,7 +4,16 @@
 
 # {Placeholder Name}
 
+<<<<<<< Updated upstream
 {Placeholder Name} serves as a beautiful and powerful editor of markdown (.md) and text (.txt) files. It leverages simple, appealing UI with distraction removal while typing so that you can stay focused on what you are writing -- be it a README file, a notesheet, or a the next bestselling novel.
+=======
+one second lemme try out lists here
+- abc
+- abc2
+
+1. yes
+2. programmers are funny
+>>>>>>> Stashed changes
 
 Switch between multiple modes, never once compromising on utility or looks:
 
