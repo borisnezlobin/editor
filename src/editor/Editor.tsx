@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { EditorContext } from '../context';
-import { Toolbar } from './Toolbar';
-import { TopToolbar } from './TopToolbar';
-import { RawView } from './raw-view';
-import { TextView } from './text-view';
-import SplitView from './split-view';
+import { Toolbar } from './components/Toolbar';
+import { TopToolbar } from './components/TopToolbar';
+import { RawView } from './components/views/raw-view';
+import { TextView } from './components/views/text-view';
+import SplitView from './components/views/split-view';
 
 export const Editor: React.FC = () => {
     const { editorType, fileContent, updateFileContent } = useContext(EditorContext);
@@ -34,6 +34,7 @@ export const Editor: React.FC = () => {
             <div className='w-full h-full relative top-20'>
                 {renderEditor()}
             </div>
+            <Toolbar />
         </div>
     );
 }

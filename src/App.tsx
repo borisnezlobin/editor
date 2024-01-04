@@ -8,7 +8,7 @@ function App() {
   return (
     <EditorProvider>
       <TypingProvider>
-          <Toaster position="botton-right" />
+          <Toaster position="bottom-right" />
           <Frame />
           <Layout />
       </TypingProvider>

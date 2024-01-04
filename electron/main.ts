@@ -22,7 +22,7 @@ function createWindow() {
       preload: path.join(__dirname, "preload.ts") // use a preload script
     }
   });
-
+  
   win.loadURL(
     isDev
       ? 'http://localhost:3000'
