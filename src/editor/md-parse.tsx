@@ -122,6 +122,7 @@ unparser.addRule("code", {
         const className = node.firstChild.className || "";
         // @ts-ignore
         const language = node.getAttribute("aria-details") || "";
+        console.log("pre has content " + content);
         // @ts-ignore
         return "\n\n" + "```" + language + "\n" + node.firstChild.textContent + "\n" + "```\n\n";
     }
