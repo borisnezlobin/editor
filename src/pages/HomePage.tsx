@@ -81,7 +81,7 @@ export const HomePage: React.FC = () => {
                     :
                     <>
                         <Clock className="w-6 h-6" weight="light" />
-                        <p>Open recents: </p>
+                        <p>Recents: </p>
                         {recents.map((e: { name: string, path: string }, i: number) => {
                             return <Muted className="flex flex-row">
                                 <p className="hover:underline cursor-pointer" onClick={async () => {
@@ -102,7 +102,7 @@ export const HomePage: React.FC = () => {
                 </div>
                 <div onClick={() => window.open(CONFIG.GIT_REPO)} className="flex flex-row text-base gap-2 justify-start items-center">
                     <GithubLogo className="w-6 h-6" weight="light" />
-                    <p className="hover:underline cursor-pointer">Check out this project on GitHub</p>
+                    <p className="hover:underline cursor-pointer">{CONFIG.name} on GitHub</p>
                 </div>
             </div>
         </>
@@ -153,7 +153,7 @@ export const HomePage: React.FC = () => {
     const logo = (
         <div className="flex flex-row justify-start items-center gap-2">
             <TextT className="w-48 h-48" weight="light" />
-            <p className="text-2xl">Placeholder Name</p>
+            <p className="text-2xl">{CONFIG.name}</p>
         </div>
     )
 

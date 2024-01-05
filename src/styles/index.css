@@ -74,14 +74,15 @@ body{
   width: 100%;
   min-width: 14rem;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 100;
+  z-index: 20;
   transition: all .25s ease;
   left: 50%;
+  top: 100%;
   transform: translateX(-50%);
 }
 
 .focus-dropdown:hover .dropdown-content{
-  top: 100%;
+  /* top: 100%; */
   opacity: 1;
   pointer-events: all;
 }
