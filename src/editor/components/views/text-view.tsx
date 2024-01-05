@@ -76,7 +76,7 @@ export const TextView: React.FC<EditViewProps> = ({ value, includeMd = false, on
                     suppressContentEditableWarning // yup
                     ref={container}
                     onInput={(e) => {
-                        console.log(unparse(e.currentTarget.innerHTML));
+                        console.log(includeMd ? parseInnerText(e.currentTarget) : unparse(e.currentTarget.innerHTML));
                         // onChange(includeMd ? parseInnerText(e.currentTarget) : cleanNewlines(unparse(e.currentTarget.innerHTML)));
                         setLastKeyStroke(Date.now());
                     }}
