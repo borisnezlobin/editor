@@ -2,12 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;0,800;1,400;1,700&family=Ubuntu+Mono:wght@400;700&&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap');
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Open Sans', sans-serif;
 }
 
 body{
@@ -15,12 +15,12 @@ body{
   line-height: 1.5;
   color: #333;
   overflow: hidden;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .blur-on-unfocus{
   transition: filter .25s ease;
 }
-
 
 .secondary-text {
   color: #777;
@@ -31,7 +31,7 @@ body{
 }
 
 .monospace{
-  font-family: 'Ubuntu Mono', monospace;
+  font-family: "Fira Code", 'Ubuntu Mono', monospace;
 }
 
 /* bounce transition */
@@ -40,7 +40,7 @@ body{
 }
 
 .code, .md-container code{
-  font-family: 'Ubuntu Mono', monospace;
+  font-family: "Fira Code", 'Ubuntu Mono', monospace;
   /* code pill */
   background-color: #f1f1f1;
   border-radius: 4px;
@@ -49,7 +49,7 @@ body{
   color: #333;
 }
 
-.codeblock, .md-container pre {
+/* .codeblock, .md-container pre {
   background-color: #f1f1f1;
   border-radius: 4px;
   padding: 0.2rem 0.4rem;
@@ -57,7 +57,7 @@ body{
   color: #333;
   margin: 1rem 0;
   overflow-x: auto;
-}
+} */
 
 .focus-dropdown {
   outline: none;

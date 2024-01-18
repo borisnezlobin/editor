@@ -4,6 +4,8 @@ import "./styles/index.css";
 import { Frame } from "./utils/Frame";
 import { Layout } from "./utils/Layout";
 
+import "./styles/light_prism.css";
+
 function App() {
   return (
     <EditorProvider>
