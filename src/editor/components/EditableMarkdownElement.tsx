@@ -177,7 +177,7 @@ export const EditableMarkdownElement: React.FC<MarkdownElementProps> = ({ elemen
     if(element.type == "code"){
         if(element.text == "") return <></>;
         if(includeMD) return (
-            <div {...props} className="bg-[#f1f1f1] rounded-lg p-2 monospace text-sm text-[#333] my-4 overflow-x-auto">
+            <div {...props} className="bg-[#f1f1f1] rounded-lg p-2 monospace text-sm my-4 overflow-x-auto">
                 <span className="text-green-700">```{element.lang + "\n"}</span>
                 <pre className="p-0 overflow-visible">
                     <code className={`language-${element.lang}`}>
@@ -188,7 +188,7 @@ export const EditableMarkdownElement: React.FC<MarkdownElementProps> = ({ elemen
             </div>
         )
         return (
-            <pre aria-details={element.lang} {...props}>
+            <pre aria-details={element.lang} {...props} className="bg-[#f1f1f1] text-sm overflow-x-auto monospace rounded-lg">
                 <code className={`language-${element.lang}`}>
                 {deEscape(element.text) + "\n"}
                 </code>
