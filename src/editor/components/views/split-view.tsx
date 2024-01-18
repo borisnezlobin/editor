@@ -1,7 +1,7 @@
 import { HTMLProps } from "react";
 import { RawView } from "./raw-view";
 import { TextView } from "./text-view";
-import { EditViewProps } from "./EditViewProps";
+import { EditViewProps } from "../../EditViewProps";
 
 const SplitView: React.FC<EditViewProps> = ({ value, onChange }) => {
     return (
