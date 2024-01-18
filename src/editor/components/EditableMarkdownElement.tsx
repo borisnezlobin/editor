@@ -1,13 +1,14 @@
 import { Token } from "marked";
 import { ArrowSquareOut, Check, Copy, PencilLine, X } from "@phosphor-icons/react";
 import { v4 as uuidv4 } from 'uuid';
-import { deEscape, mdparse } from "../md-parse";
+import { deEscape } from "../md-parse";
+import { highlightAll, highlightAllUnder } from "prismjs";
 import { UnstyledText } from "../../typography/UnstyledText";
 import { TextButton } from "../../utils/text-button";
 import { Separator } from "../../utils/separator";
 import { errorToast, successToast } from "../../utils/toast";
 import { Modal } from "../../utils/modal";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { DynamicHeader } from "../../typography/dynamic/dheader";
 import React from "react";
 import { Muted } from "../../typography/muted";
@@ -146,6 +147,10 @@ export const EditableMarkdownElement: React.FC<MarkdownElementProps> = ({ elemen
     // @ts-ignore
     const id = element.id ? element.id : "no id" + uuidv4();
 
+    useEffect(() => {
+        highlightAll();
+    }, []);
+
     if(element.type === "paragraph"){
         return (
             <>
@@ -172,15 +177,21 @@ export const EditableMarkdownElement: React.FC<MarkdownElementProps> = ({ elemen
     if(element.type == "code"){
         if(element.text == "") return <></>;
         if(includeMD) return (
-            <pre {...props}>
-                ```{element.lang + "\n"}
-                {deEscape(element.text) + "\n"}
-                ```
-            </pre>
+            <div {...props} className="bg-[#f1f1f1] rounded-lg p-2 monospace text-sm text-[#333] my-4 overflow-x-auto">
+                <span className="text-green-700">```{element.lang + "\n"}</span>
+                <pre className="p-0 overflow-visible">
+                    <code className={`language-${element.lang}`}>
+                    {deEscape(element.text) + "\n"}
+                    </code>
+                </pre>
+                <span className="text-green-700">```</span>
+            </div>
         )
         return (
             <pre aria-details={element.lang} {...props}>
+                <code className={`language-${element.lang}`}>
                 {deEscape(element.text) + "\n"}
+                </code>
             </pre>
         )
     }
