@@ -4,7 +4,8 @@ export const parseInnerText = (element: HTMLElement): string => {
     // remove all <aside> elements, along with their children
     const asides = clone.querySelectorAll('aside');
     asides.forEach(aside => aside.remove());
-
+    clone.innerHTML = clone.innerHTML.replaceAll(/<span[^>]*>(.*?)<\/span>/g, '$1');
+    
     clone.innerHTML = clone.innerHTML.replaceAll("</", "\n</");
 
     return cleanNewlines(clone.innerText);
