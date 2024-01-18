@@ -19,24 +19,24 @@ export function deEscape(htmlStr: string) {
         .replace(/&#39;/g, "'");
 }
 
-const renderer = {
-    heading(text: string, level: number) {
-        return `
-            <h${level} class="text-${headerSizes[level]} font-bold mb-4">
-            ${text}
-            </h${level}>
-        `;
-    },
-    codespan(text: string) {
-        return `<span class="code">${escape(text)}</span>`;
-    },
-    code(text: string, infostring: string | undefined, escaped: boolean) {
-        return `<pre class="codeblock break-all">${escape(text)}</pre>`;
-    },
-};
+// const renderer = {
+//     heading(text: string, level: number) {
+//         return `
+//             <h${level} class="text-${headerSizes[level]} font-bold mb-4">
+//             ${text}
+//             </h${level}>
+//         `;
+//     },
+//     codespan(text: string) {
+//         return `<span class="code">${escape(text)}</span>`;
+//     },
+//     code(text: string, infostring: string | undefined, escaped: boolean) {
+//         return `<pre class="codeblock break-all">${escape(text)}</pre>`;
+//     },
+// };
 
 
-marked.use({ renderer });
+// marked.use({ renderer });
 
 export function mdparse(content: string): string {
     return marked.parse(content);
@@ -54,12 +54,12 @@ const unparser = new TurndownService({
     linkStyle: "inlined",
 });
 
-unparser.addRule("code", {
-    filter: ["pre"],
-    replacement: function (content: string) {
-        return "\n```\n" + content + "\n```\n";
-    }
-});
+// unparser.addRule("code", {
+//     filter: ["pre"],
+//     replacement: function (content: string) {
+//         return "\n```\n" + content + "\n```\n";
+//     }
+// });
 
 // links are rendered as spans, we want to check (for every span)
 // if className contains "link", and convert it to a markdown link if it is
@@ -122,6 +122,7 @@ unparser.addRule("code", {
         const className = node.firstChild.className || "";
         // @ts-ignore
         const language = node.getAttribute("aria-details") || "";
+        console.log("pre has content " + content);
         // @ts-ignore
         return "\n\n" + "```" + language + "\n" + node.firstChild.textContent + "\n" + "```\n\n";
     }

@@ -1,15 +1,14 @@
-import { Token, TokensList } from "marked";
-import { EditViewProps } from "./EditViewProps";
-import { EditableMarkdownElement } from "./EditableMarkdownElement";
-import { mdArray, unparse } from "./md-parse";
+import { Token } from "marked";
+import { EditViewProps } from "../../EditViewProps";
+import { EditableMarkdownElement } from "../EditableMarkdownElement";
+import { mdArray, unparse } from "../../md-parse";
 import { useContext, useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
-import { TypingContext } from "../context";
-import { CONFIG } from "../utils/config";
-import { Muted } from "../typography/muted";
-import { TextTypingEffect } from "../utils/text-typing-effect";
-import placeholderWords from "./empty-editor-phrases.json";
-import { cleanNewlines, parseInnerText } from "../utils/format-utils";
+import { TypingContext } from "../../../context";
+import { CONFIG } from "../../../utils/config";
+import { TextTypingEffect } from "../../../typography/dynamic/text-typing-effect";
+import placeholderWords from "../../empty-editor-phrases.json";
+import { cleanNewlines, parseInnerText } from "../../../utils/format-utils";
 
 const slapIdOnTokens = (tokens: Token[]): Token[] => {
     for(let i = 0; i < tokens.length; i++) {
@@ -30,10 +29,11 @@ export const TextView: React.FC<EditViewProps> = ({ value, includeMd = false, on
     const { typing, focusAllowed, setTyping } = useContext(TypingContext);
 
     useEffect(() => {
-        if(arr.length == 0 && value) {
-            setArr(slapIdOnTokens(mdArray(value)));
-        }
+        setArr(slapIdOnTokens(mdArray(value)));
+        console.log("updating array");
+    }, [value])
 
+    useEffect(() => {
         if(focusAllowed){
             const checker = setInterval(() => {
                 // bye-bye battery
@@ -45,7 +45,7 @@ export const TextView: React.FC<EditViewProps> = ({ value, includeMd = false, on
 
             return () => clearInterval(checker);
         }
-    }, [value, arr, lastKeyStroke, focusAllowed]);
+    }, [arr, lastKeyStroke, focusAllowed]);
 
     const container = useRef<HTMLDivElement>(null);
 
@@ -76,8 +76,8 @@ export const TextView: React.FC<EditViewProps> = ({ value, includeMd = false, on
                     suppressContentEditableWarning // yup
                     ref={container}
                     onInput={(e) => {
-                        console.log(parseInnerText(e.currentTarget));
-                        onChange(includeMd ? parseInnerText(e.currentTarget) : cleanNewlines(unparse(e.currentTarget.innerHTML)));
+                        console.log(includeMd ? parseInnerText(e.currentTarget) : unparse(e.currentTarget.innerHTML));
+                        // onChange(includeMd ? parseInnerText(e.currentTarget) : cleanNewlines(unparse(e.currentTarget.innerHTML)));
                         setLastKeyStroke(Date.now());
                     }}
                 >

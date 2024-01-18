@@ -1,12 +1,12 @@
 import { useContext, useRef, useState } from "react";
-import { TextButton } from "../utils/text-button";
-import { EditorContext, TypingContext } from "../context";
+import { TextButton } from "../../utils/text-button";
+import { EditorContext, TypingContext } from "../../context";
 import { ArrowLeft, ArrowSquareOut, Article, Barcode, BookOpenText, CaretDown, Check, CheckFat, GithubLogo, Notches, TextAa, Warning, X, XSquare } from "@phosphor-icons/react";
-import { Muted } from "../typography/muted";
-import { Separator } from "../utils/separator";
-import { Modal } from "../utils/modal";
-import { DynamicHeader } from "../typography/dynamic/dheader";
-import WarningIllustration from "../illustrations/warning-illustration";
+import { Muted } from "../../typography/muted";
+import { Separator } from "../../utils/separator";
+import { Modal } from "../../utils/modal";
+import { DynamicHeader } from "../../typography/dynamic/dheader";
+import WarningIllustration from "../../illustrations/warning-illustration";
 import { ThumbsUp } from "@phosphor-icons/react/dist/ssr";
 
 
@@ -59,7 +59,7 @@ export const TopToolbar: React.FC = () => {
 
     return (
         <>
-            <div className={`w-full h-10 border-b z-10 border-gray-100 py-2 px-2 fixed top-10 flex flex-row justify-between items-center bg-white transition ${typing ? "pointer-events-none opacity-0" : "opacity-100"}`}>
+            <div className={`w-full h-10 border-b z-10 border-gray-100 py-2 px-2 fixed top-10 flex flex-row justify-between items-center bg-white transition duration-300 ${typing ? "opacity-0" : "opacity-100"}`}>
                 <div className={`flex flex-row justify-start items-center`}>
                     <TextButton onClick={saveAndClose}>
                         <ArrowLeft className="w-6 h-6 cursor-pointer" weight="light" />
@@ -142,7 +142,7 @@ export const TopToolbar: React.FC = () => {
                 <DynamicHeader depth={2} includeMD={true} text="Mixed View is a work in progress" props={{}}/>
                 <p>
                     Mixed View may not work as expected, and may <em>*irreversibly*</em> harm your file.<br />
-                    There are  many known issues -- it is best to avoid using lists, tables, and quotes.
+                    There are  many known issues -- it is best to avoid using lists, tables, and quotes.<br />
                 </p>
                 <div className="w-full h-36 flex flex-col justify-center items-end ">
                     <TextButton className="text-red-700 bg-gray-50 border border-gray-200 hover:border-red-900" onClick={() => {
