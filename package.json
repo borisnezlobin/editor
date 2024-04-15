@@ -6,7 +6,7 @@
   "dependencies": {
     "@phosphor-icons/react": "^2.0.14",
     "@testing-library/jest-dom": "^6.2.0",
-    "@testing-library/react": "^14.1.2",
+    "@testing-library/react": "^15.0.2",
     "@testing-library/user-event": "^14.5.2",
     "@types/dompurify": "^3.0.5",
     "@types/jest": "^29.5.8",
@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.2.0",
-    "@testing-library/react": "^14.0.0",
+    "@testing-library/react": "^15.0.2",
     "@testing-library/user-event": "^14.4.3",
     "@types/electron-devtools-installer": "^2.2.2",
     "@types/jest": "^29.5.8",
